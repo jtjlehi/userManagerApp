@@ -12,7 +12,22 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
-    res.render('edit');
+    res.render('edit', {
+        users: [
+            {
+                name: {
+                    name: 'name',
+                    type: 'text',
+                    value: 'Jared'
+                },
+                password: {
+                    name: 'password',
+                    type: 'text',
+                    value: ''
+                }
+            }
+        ]
+    });
 });
 
 app.listen(3000);

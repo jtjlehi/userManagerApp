@@ -1,4 +1,9 @@
 extends layouts/layout
 
 block bodyContent
-    h1 edit works.
+    form(method="post", action=action)
+        each user in users
+            each field in user
+                div
+                    label(type=field.type, for=field.name)=field.name
+                    input(id=field.name, name=field.name, value=field.value)

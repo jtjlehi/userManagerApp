@@ -1,34 +1,20 @@
+// outside sources
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
-
+// my imports
+const edit = require('./edit');
+// define app
 const app = express();
-
+// use basic middleware on app.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
+// enable and use pug files
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.get('/', (req, res) => {
-    res.render('edit', {
-        users: [
-            {
-                name: {
-                    name: 'name',
-                    type: 'text',
-                    value: 'Jared'
-                },
-                password: {
-                    name: 'password',
-                    type: 'text',
-                    value: ''
-                }
-            }
-        ]
-    });
-});
+edit(app);
 
 app.listen(3000);
 

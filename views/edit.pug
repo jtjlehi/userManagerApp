@@ -1,9 +1,9 @@
 extends layouts/layout
 
 block bodyContent
-    form(method="post", action=action)
+    form(method="POST", action=action)
         each user in users
             each field in user
                 div
-                    label(type=field.type, for=field.name)=field.name
-                    input(id=field.name, name=field.name, value=field.value)
+                    label(for=field.name)=field.name
+                    input(type=field.type, id=field.name, name=field.name, value=field.value)

@@ -10,7 +10,7 @@ module.exports = function(app) {
                     },
                     password: {
                         name: 'password',
-                        type: 'text',
+                        type: 'password',
                         value: ''
                     }
                 }

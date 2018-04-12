@@ -8,17 +8,12 @@ block bodyContent
             th Email
             th Age
             th Edit
-        tr
-            td Jared Jacobson
-            td jtjlehi@gmail.com
-            td 17
-            td
-                a(href='/edit') edit
-        tr
-            td Jessica Jacobson
-            td jajlehi@gmail.com
-            td 12
-            td
-                a(href='/edit') edit
+        each user in users
+            tr
+                td= user.name
+                td= user.email
+                td= user.age
+                td
+                    a(href='/edit') edit
     button
         a(href='/add') + ADD USER +

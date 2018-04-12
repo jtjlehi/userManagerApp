@@ -1,11 +1,11 @@
-const parseUserData = require('./parse_user_data');
+const DataManager = require('./data_manager');
 
 module.exports = function(app) {
     app.get('/users', (req, res) => {
         res.redirect('/')
     });
     app.get('/', (req, res) => {
-        parseUserData((users) => {
+        DataManager.parse((users) => {
             res.render('users', {users: users});
         });
     });

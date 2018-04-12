@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const edit = require('./edit');
 const add = require('./add_user');
 const addPost = require('./add_post');
+const users = require('./users_page')
 // define app
 const app = express();
 // use basic middleware on app.
@@ -19,6 +20,7 @@ app.set('view engine', 'pug');
 edit(app);
 add(app);
 addPost(app);
+users(app);
 
 app.listen(3000);
 

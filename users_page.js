@@ -5,8 +5,10 @@ module.exports = function(app) {
         res.redirect('/')
     });
     app.get('/', (req, res) => {
-        DataManager.parse((users) => {
-            res.render('users', {users: users});
+        DataManager.parse()
+        .then((users) => res.render('users', {users: users}))
+        .catch((err) => {
+            throw err;
         });
     });
 }

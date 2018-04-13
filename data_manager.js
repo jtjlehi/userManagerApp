@@ -5,9 +5,23 @@ class DataManager {
         return new Promise((resolve, reject) => {
             fs.readFile('users-data.txt', {encoding: 'utf8'}, (err, data) => {
                 if (err) throw err;
+                let location = 0;
                 const users = data.split('\n')
                     .filter(userString => userString !== "")
-                    .map(userString => JSON.parse(userString));
+                    .map((userString, index) => {
+                        let start = location;
+                        let end = location + userString.length;
+                        console.log('start: ', start);
+                        console.log('end: ', end);
+                        return {
+                            userData: JSON.parse(userString),
+                            index: {
+                                start: start,
+                                end: end
+                            }
+                        }
+                        
+                    });
                 resolve(users);
             });
         })
@@ -15,15 +29,14 @@ class DataManager {
     addUser(user) {
         return this.parse()
         .then((users) => {
-            if (users.filter(existingUser => existingUser.id === user.id).length !== 0) {
-                throw new Error('user exists');
+            if (users.filter(existingUser => existingUser.userData.id === user.id).length !== 0) {
+                return new Error('Whoops! That user already exists.');
             }
-            console.log(user);
-            fs.appendFile('./users-data.txt', JSON.stringify(user), (err) => {
-                if (err) throw err;
+            fs.appendFile('./users-data.txt', JSON.stringify(user) + '\n', (err) => {
+                if (err) return new Error('Sorry, Problem occurred while saving data, we will do everything we can to fix it.');
+                return 'User added';
             });
         })
-        .catch((err) => {throw err})
     }
     generateUser(name, email, age) {
         const id = this.idGenerator(name + email + age);

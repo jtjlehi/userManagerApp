@@ -1,4 +1,3 @@
-const fs = require('fs');
 const DataManager = require('./data_manager');
 
 module.exports = function(app) {

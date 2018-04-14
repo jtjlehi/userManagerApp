@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 // my imports
 const edit = require('./edit');
+const editPost = require('./edit_post');
 const add = require('./add_user');
 const addPost = require('./add_post');
 const users = require('./users_page');
@@ -18,6 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 edit(app);
+editPost(app);
 add(app);
 addPost(app);
 users(app);

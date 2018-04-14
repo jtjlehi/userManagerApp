@@ -1,6 +1,8 @@
+const dataManager = require('./data_manager');
+
 module.exports = function(app) {
     app.post('/edit/:user_id', (req, res) => {
-        console.log('user_id: ', req.params.user_id);
+        const updatedUser = dataManager.generateUser(req.body.name, req.body.email, req.body.age);
         res.end('edit user clicked');
-    })
+    });
 }

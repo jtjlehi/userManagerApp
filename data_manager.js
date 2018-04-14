@@ -20,7 +20,6 @@ class DataManager {
                                 end: end
                             }
                         }
-                        
                     });
                 resolve(users);
             });
@@ -42,21 +41,9 @@ class DataManager {
         const id = this.idGenerator(name + email + age);
         return {
             id: id,
-            name: {
-                name: 'name',
-                type: 'text',
-                value: name
-            },
-            email: {
-                name: 'email',
-                type: 'email',
-                value: email
-            },
-            age: {
-                name: 'age',
-                type: 'number',
-                value: age
-            }
+            name: name,
+            email: email,
+            age: age
         }
     }
     idGenerator(string) {

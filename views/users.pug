@@ -10,10 +10,10 @@ block bodyContent
             th Edit
         each user in users
             tr
-                td= user.userData.name.value
-                td= user.userData.email.value
-                td= user.userData.age.value
+                td= user.name
+                td= user.email
+                td= user.age
                 td
-                    a(href=`/edit/user?=${user.userData.id}`) edit
+                    a(href=`/edit/user?=${user.id}`) edit
     button
         a(href='/add') + ADD USER +

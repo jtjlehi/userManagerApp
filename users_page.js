@@ -6,7 +6,10 @@ module.exports = function(app) {
     });
     app.get('/', (req, res) => {
         DataManager.parse()
-        .then((users) => res.render('users', {users: users}))
+        .then(users => users.map(user => user.userData))
+        .then((users) => {
+            res.render('users', {users: users});
+        })
         .catch((err) => {
             throw err;
         });

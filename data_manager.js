@@ -70,6 +70,15 @@ class DataManager {
         }
         return hash;
     }
+    replaceUser(oldUserString, newUserString) {
+        return new Promise((resolve, reject) => {
+            fs.open('./users-data.txt', 'r+', (err, fd) => {
+                fs.read(fd, 'utf8', (err, bytesRead, content) => {
+                    console.log(content);
+                })
+            })
+        })
+    }
 }
 
 module.exports = new DataManager();

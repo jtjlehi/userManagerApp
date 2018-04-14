@@ -14,6 +14,6 @@ block bodyContent
                 td= user.email
                 td= user.age
                 td
-                    a(href=`/edit/user?=${user.id}`) edit
+                    a(href=`/edit/${user.id}`) edit
     button
         a(href='/add') + ADD USER +

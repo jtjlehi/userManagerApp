@@ -5,12 +5,13 @@ class DataManager {
         return new Promise((resolve, reject) => {
             fs.readFile('users-data.txt', {encoding: 'utf8'}, (err, data) => {
                 if (err) throw err;
-                let location = 0;
+                let location = 1;
                 const users = data.split('\n')
                     .filter(userString => userString !== "")
                     .map((userString, index) => {
                         let start = location;
                         let end = location + userString.length;
+                        location = end;
                         console.log('start: ', start);
                         console.log('end: ', end);
                         return {
@@ -57,14 +58,43 @@ class DataManager {
         }
         return hash;
     }
-    replaceUser(oldUserString, newUserString) {
-        return new Promise((resolve, reject) => {
-            fs.open('./users-data.txt', 'r+', (err, fd) => {
-                fs.read(fd, 'utf8', (err, bytesRead, content) => {
-                    console.log(content);
-                })
+    replaceUser(userId, newUser) {
+        const filePath = './users-data.txt';
+        return this.parse()
+        .then(users => {
+            const user = users.find(user => user.userData.id == userId);
+            if (user === undefined) throw new Error('User undefined');
+            return {start: user.index.start, end: user.index.end};
+        })
+        .then((indexes) => {
+            return new Promise((resolve, reject) => {
+                fs.readFile(filePath, {encoding: 'utf8'}, (err, data) => {
+                    if (err) reject(err);
+                    console.log('indexes: ', indexes);
+                    resolve({
+                        beforeUser: data.substring(0, indexes.start),
+                        afterUser: data.substring(indexes.end)
+                    });
+                });
             })
         })
+        .then((file) => {
+            const newFile = file.beforeUser + newUser + file.afterUser;
+            return new Promise((resolve, reject) => {
+                fs.truncate(filePath, (err) => {
+                    if (err) reject(err);
+                    resolve(newFile);
+                });
+            });
+        })
+        .then(newFile => {
+            return new Promise((resolve, reject) => {
+                fs.writeFile(filePath, newFile, (err) => {
+                    if (err) reject(err);
+                    resolve();
+                });
+            });
+        });
     }
 }
 

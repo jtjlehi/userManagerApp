@@ -5,8 +5,8 @@ module.exports = function(app) {
         const user = DataManager.generateUser(req.body.name, req.body.email, req.body.age);
         DataManager.addUser(user)
         .then((err) => {
-            if (err) res.end(err.message);
-            res.end('User added');
+            if (err) res.render('message', {message: err.message});
+            res.render('message', {message: 'added User'})
         })
     });
 }

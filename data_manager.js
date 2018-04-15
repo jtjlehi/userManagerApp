@@ -5,7 +5,7 @@ class DataManager {
         return new Promise((resolve, reject) => {
             fs.readFile('users-data.txt', {encoding: 'utf8'}, (err, data) => {
                 if (err) throw err;
-                let location = 1;
+                let location = 0;
                 const users = data.split('\n')
                     .filter(userString => userString !== "")
                     .map((userString, index) => {

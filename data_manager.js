@@ -12,8 +12,6 @@ class DataManager {
                         let start = location;
                         let end = location + userString.length;
                         location = end;
-                        console.log('start: ', start);
-                        console.log('end: ', end);
                         return {
                             userData: JSON.parse(userString),
                             index: {
@@ -32,7 +30,7 @@ class DataManager {
             if (users.filter(existingUser => existingUser.userData.id === user.id).length !== 0) {
                 return new Error('Whoops! That user already exists.');
             }
-            fs.appendFile('./users-data.txt', JSON.stringify(user) + '\n', (err) => {
+            fs.appendFile('./users-data.txt', `${JSON.stringify(user)}\n`, (err) => {
                 if (err) return new Error('Sorry, Problem occurred while saving data, we will do everything we can to fix it.');
                 return 'User added';
             });
@@ -73,7 +71,7 @@ class DataManager {
                     console.log('indexes: ', indexes);
                     resolve({
                         beforeUser: data.substring(0, indexes.start),
-                        afterUser: data.substring(indexes.end)
+                        afterUser: data.substring(indexes.end + 1)
                     });
                 });
             })

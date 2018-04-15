@@ -8,6 +8,7 @@ block bodyContent
             th Email
             th Age
             th Edit
+            th Delete
         each user in users
             tr
                 td= user.name
@@ -15,5 +16,7 @@ block bodyContent
                 td= user.age
                 td
                     a(href=`/edit/${user.id}`) edit
+                td
+                    a(href=`/delete/${user.id}`) delete
     button
         a(href='/add') + ADD USER +

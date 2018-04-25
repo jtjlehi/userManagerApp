@@ -5,21 +5,8 @@ class DataManager {
         return new Promise((resolve, reject) => {
             fs.readFile('users-data.txt', {encoding: 'utf8'}, (err, data) => {
                 if (err) throw err;
-                let location = 0;
-                const users = data.split('\n')
-                    .filter(userString => userString !== "")
-                    .map((userString, index) => {
-                        let start = location;
-                        let end = location + userString.length;
-                        location = end + 1;
-                        return {
-                            userData: JSON.parse(userString),
-                            index: {
-                                start: start,
-                                end: end
-                            }
-                        }
-                    });
+                const users = JSON.parse(data);
+                console.log(users);
                 resolve(users);
             });
         })
@@ -58,42 +45,47 @@ class DataManager {
     }
     replaceUser(userId, newUser) {
         const filePath = './users-data.txt';
+
+        fs.readFile(filePath, {encoding: 'utf8'}, (err, data) => {
+            
+        })
+
         return this.parse()
-        .then(users => {
-            const user = users.find(user => user.userData.id == userId);
-            if (user === undefined) throw new Error('User undefined');
-            return {start: user.index.start, end: user.index.end};
-        })
-        .then((indexes) => {
-            return new Promise((resolve, reject) => {
-                fs.readFile(filePath, {encoding: 'utf8'}, (err, data) => {
-                    if (err) reject(err);
-                    resolve({
-                        beforeUser: data.substring(0, indexes.start + 1),
-                        afterUser: data.substring(indexes.end + 2)
-                    });
-                });
-            })
-        })
-        .then((file) => {
-            console.log(`file before user: '${file.beforeUser}'`);
-            console.log(`file after user: '${file.afterUser}'`);
-            const newFile = file.beforeUser + newUser + file.afterUser;
-            return new Promise((resolve, reject) => {
-                fs.truncate(filePath, (err) => {
-                    if (err) reject(err);
-                    resolve(newFile);
-                });
-            });
-        })
-        .then(newFile => {
-            return new Promise((resolve, reject) => {
-                fs.writeFile(filePath, newFile, (err) => {
-                    if (err) reject(err);
-                    resolve();
-                });
-            });
-        });
+        // .then(users => {
+        //     const user = users.find(user => user.userData.id == userId);
+        //     if (user === undefined) throw new Error('User undefined');
+        //     return {start: user.index.start, end: user.index.end};
+        // })
+        // .then((indexes) => {
+        //     return new Promise((resolve, reject) => {
+        //         fs.readFile(filePath, {encoding: 'utf8'}, (err, data) => {
+        //             if (err) reject(err);
+        //             resolve({
+        //                 beforeUser: data.substring(0, indexes.start + 1),
+        //                 afterUser: data.substring(indexes.end + 2)
+        //             });
+        //         });
+        //     })
+        // })
+        // .then((file) => {
+        //     console.log(`file before user: '${file.beforeUser}'`);
+        //     console.log(`file after user: '${file.afterUser}'`);
+        //     const newFile = file.beforeUser + newUser + file.afterUser;
+        //     return new Promise((resolve, reject) => {
+        //         fs.truncate(filePath, (err) => {
+        //             if (err) reject(err);
+        //             resolve(newFile);
+        //         });
+        //     });
+        // })
+        // .then(newFile => {
+        //     return new Promise((resolve, reject) => {
+        //         fs.writeFile(filePath, newFile, (err) => {
+        //             if (err) reject(err);
+        //             resolve();
+        //         });
+        //     });
+        // });
     }
 }
 

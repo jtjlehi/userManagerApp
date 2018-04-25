@@ -1,5 +1,1 @@
-
-{"id":1202044357,"name":"Jared T Jacasdfaobson","email":"jtjlehi@gmail.com","age":"17"}
-{"id":1929131886,"name":"a;df","email":"adf@adf","age":"8"}
-{"id":-1054104665,"name":"asdfa","email":"asdfadsf@sdf","age":"3"}
-{"id":743497577,"name":"asdfa","email":"aa@ga","age":"6"}
+[{"id":1202044357,"name":"Jared T Jacasdfaobson","email":"jtjlehi@gmail.com","age":"17"},{"id":1929131886,"name":"a;df","email":"adf@adf","age":"8"},{"id":-1054104665,"name":"asdfa","email":"asdfadsf@sdf","age":"3"},{"id":743497577,"name":"asdfa","email":"aa@ga","age":"6"}]

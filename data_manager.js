@@ -10,9 +10,7 @@ class DataManager {
                     .filter(userString => userString !== "")
                     .map((userString, index) => {
                         let start = location;
-                        // console.log('start:', data.charAt(start));
                         let end = location + userString.length;
-                        // console.log('end:', data.charAt(end));
                         location = end + 1;
                         return {
                             userData: JSON.parse(userString),
@@ -70,9 +68,6 @@ class DataManager {
             return new Promise((resolve, reject) => {
                 fs.readFile(filePath, {encoding: 'utf8'}, (err, data) => {
                     if (err) reject(err);
-                    console.log('indexes: ', indexes);
-                    console.log('char at start: ', data.charAt(indexes.start + 1));
-                    console.log('char at end: ', data.charAt(indexes.end + 1))
                     resolve({
                         beforeUser: data.substring(0, indexes.start + 1),
                         afterUser: data.substring(indexes.end + 2)

@@ -3,8 +3,8 @@ const dataManager = require('./data_manager');
 module.exports = function(app) {
     app.get('/edit/:user_id', (req, res) => {
         dataManager.parse()
-        .then((users) => users.map((user) => user.userData))
         .then(users => {
+            console.log(users);
             const user = users.find(user => {
                 return user.id == req.params.user_id;
             });
